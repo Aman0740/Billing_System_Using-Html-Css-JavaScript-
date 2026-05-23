@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Bill - Retail Billing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="billing-container">
+        <!-- Left Panel: Product Management & Selection -->
+        <div class="panel left-panel">
+            <div class="panel-header">
+                <h2>Product Catalog</h2>
+            </div>
+            
+            <!-- Quick Add Custom Item Form -->
+            <form id="product-form" class="quick-add-form">
+                <input type="text" id="item-name" placeholder="Item Name" required>
+                <input type="number" id="item-price" placeholder="Price" step="0.01" required>
+                <input type="number" id="item-qty" placeholder="Qty" value="1" min="1" required>
+                <button type="submit" class="btn-primary">Add Item</button>
+            </form>
+
+            <!-- Quick Selection Catalog -->
+            <div class="catalog-grid" id="catalog-list">
+                <!-- Preset items will be generated here by JS -->
+            </div>
+        </div>
+
+        <!-- Right Panel: Live Invoice & Checkout -->
+        <div class="panel right-panel" id="invoice-panel">
+            <div class="invoice-wrapper">
+                <div class="invoice-header">
+                    <div>
+                        <h1>RETAIL INVOICE</h1>
+                        <p class="text-muted">Transaction System</p>
+                    </div>
+                    <div class="text-right">
+                        <p><strong>Date:</strong> <span id="current-date"></span></p>
+                        <p><strong>Inv #:</strong> <span id="invoice-number"></span></p>
+                    </div>
+                </div>
+
+                <!-- Invoice Items Table -->
+                <div class="invoice-body">
+                    <table class="billing-table">
+                        <thead>
+                            <tr>
+                                <th>Item Description</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-right">Total</th>
+                                <th class="text-center no-print">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cart-table-body">
+                            <!-- Cart items dynamically injected here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Calculation Summary -->
+                <div class="invoice-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (18% GST):</span>
+                        <span id="summary-tax">$0.00</span>
+                    </div>
+                    <div class="summary-row discount-row">
+                        <span>Discount (%):</span>
+                        <input type="number" id="discount-input" value="0" min="0" max="100">
+                    </div>
+                    <hr>
+                    <div class="summary-row total-row">
+                        <span>Grand Total:</span>
+                        <span id="summary-grand-total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-bar no-print">
+                <button class="btn-secondary" onclick="resetBillingSystem()">Clear All</button>
+                <button class="btn-success" onclick="window.print()">Print & Save Invoice</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
